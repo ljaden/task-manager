@@ -6,8 +6,8 @@ const db = require("../models/taskSchema");
 const getAllTask = async (req, res) => {
   try {
     const task = await db.find({});
-    console.log("getAllTask");
-    res.send(task);
+    // res.send(task);
+    res.render("index", { task: task });
   } catch (error) {
     console.log(error);
   }
@@ -38,7 +38,10 @@ const createTask = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      statusCode: 500,
+      message: error,
+    });
   }
 };
 
@@ -55,10 +58,14 @@ const updateTask = async (req, res) => {
     });
 
     res.status(200).json({
+      statusCode: 200,
       message: updatedTask,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      statusCode: 500,
+      message: error,
+    });
   }
 };
 
@@ -76,7 +83,10 @@ const deleteTask = async (req, res) => {
       message: "Success! Task was removed!",
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      statusCode: 500,
+      message: error,
+    });
   }
 };
 
