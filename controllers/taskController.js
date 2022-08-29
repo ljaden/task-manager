@@ -19,8 +19,16 @@ const getAllTask = async (req, res) => {
 /*
   Queries DB and returns a SPECIFIC task
 */
-const getSpecificTask = async (req, res) => {
-  res.send(`GET ONE SPECIFIC TASK ${req.params.id}`);
+const getTask = async (req, res) => {
+  try {
+    const task = await db.findById(req.params.id);
+    res.status(200).json(task);
+  } catch (error) {
+    res.status(404).json({
+      statusCode: 404,
+      message: error,
+    });
+  }
 };
 
 /*
@@ -95,7 +103,7 @@ const deleteTask = async (req, res) => {
 
 module.exports = {
   getAllTask,
-  getSpecificTask,
+  getTask,
   createTask,
   updateTask,
   deleteTask,
