@@ -6,10 +6,13 @@ const db = require("../models/taskSchema");
 const getAllTask = async (req, res) => {
   try {
     const task = await db.find({});
-    // res.send(task);
-    res.render("index", { task: task });
+    res.send(task);
+    // res.render("index", { task: task });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      statusCode: 500,
+      message: error,
+    });
   }
 };
 
