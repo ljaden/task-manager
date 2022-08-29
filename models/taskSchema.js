@@ -3,7 +3,9 @@ const { Schema, model } = require("mongoose");
 const TaskSchema = new Schema({
   taskName: {
     type: String,
-    required: true,
+    required: [true, "Task field cannot be empty."],
+    trim: true,
+    maxlength: [25, "Task is too long (length < 25)"],
   },
 
   completed: {
