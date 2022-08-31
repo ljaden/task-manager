@@ -7,6 +7,9 @@ const taskRoute = require("./routes/taskRoutes");
 // Database
 const connectDB = require("./config/db");
 
+// View engine ejs
+app.set("view engine", "ejs");
+
 // Middleware
 app.use(express.json());
 
